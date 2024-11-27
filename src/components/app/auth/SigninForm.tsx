@@ -7,7 +7,7 @@ type Credentials = {
 };
 
 export const SigninForm: React.FC = () => {
-  const { handleSubmit, register, formState } = useForm<Credentials>();
+  const { handleSubmit, register } = useForm<Credentials>();
 
   const handleLogin = handleSubmit(async (formValues) => {
     console.log(formValues);

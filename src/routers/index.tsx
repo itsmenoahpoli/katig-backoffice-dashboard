@@ -1,12 +1,17 @@
 import React from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { LazyLoadComponent } from "@/components";
-import { AuthLayout } from "@/layouts";
+import { AuthLayout, DashboardLayout } from "@/layouts";
 
 /**
  * Auth Pages
  */
 const SigninPage = LazyLoadComponent(React.lazy(() => import("@/views/auth/SigninPage")));
+
+/**
+ * Dashboard Pages
+ */
+const DashboardHome = LazyLoadComponent(React.lazy(() => import("@/views/dashboard/HomePage")));
 
 export default createBrowserRouter([
   {
@@ -20,6 +25,16 @@ export default createBrowserRouter([
       {
         path: "/auth/signin",
         element: SigninPage,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: "/dashboard",
+        element: DashboardHome,
       },
     ],
   },
