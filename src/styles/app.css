@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  font-family: "Poppins", serif !important;
+}
+
+.font-lora {
+  font-family: "Lora", serif !important;
+}
