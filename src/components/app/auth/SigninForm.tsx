@@ -1,16 +1,17 @@
 import React from "react";
+import { Spinner } from "flowbite-react";
 import { useForm } from "react-hook-form";
-
-type Credentials = {
-  email: string;
-  password: string;
-};
+import { useAuthService } from "@/services";
+import type { Credentials } from "@@types/auth";
 
 export const SigninForm: React.FC = () => {
   const { handleSubmit, register } = useForm<Credentials>();
+  const { authenticateCredentials } = useAuthService();
 
-  const handleLogin = handleSubmit(async (formValues) => {
-    console.log(formValues);
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const handleLogin = handleSubmit(async (formData) => {
+    return await authenticateCredentials(formData, setLoading);
   });
 
   return (
@@ -30,8 +31,8 @@ export const SigninForm: React.FC = () => {
         required
         {...register("email", { required: true })}
       />
-      <button type="submit" className="h-[40px] w-full text-xs text-white bg-secondary shadow-md rounded-full">
-        Log In
+      <button type="submit" className="h-[40px] w-full text-xs text-white bg-secondary shadow-md rounded-full" disabled={loading}>
+        {loading ? <Spinner /> : "Log In"}
       </button>
     </form>
   );
